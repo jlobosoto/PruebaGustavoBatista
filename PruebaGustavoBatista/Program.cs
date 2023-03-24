@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using PruebaGustavoBatista.Data;
 using PruebaGustavoBatista.Models;
+using PruebaGustavoBatista.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,14 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<IMovimientosService,MovimientosService>();
+builder.Services.AddScoped<ICurrentUserService,CurrentUserService>();
+
 var app = builder.Build();
+
+var loggerFactory = app.Services.GetService<ILoggerFactory>();
+loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"]?.ToString());
 
 using (var scope = app.Services.CreateScope())
 {

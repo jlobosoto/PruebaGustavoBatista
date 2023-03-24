@@ -6,6 +6,7 @@ namespace PruebaGustavoBatista.Models
     {
         public required string Nit { get; set; }
         public decimal Cupo { get; set; }
+        public DateTime FechadeRegistro { get; set; }
         public virtual ICollection<Movimientos>? Movimientos { get; set; }
     }
 }

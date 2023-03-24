@@ -7,6 +7,7 @@ namespace PruebaGustavoBatista.Services
 
     public interface IMovimientosService
     {
+        Task<SummaryDto> GetSummaryAsync(string nit);
     }
 
     public class MovimientosService:IMovimientosService
@@ -29,7 +30,7 @@ namespace PruebaGustavoBatista.Services
                .Where(m => m.UserId == nit)
                .ToListAsync();
 
-            return new SummaryDto { DatosCliente=new Cliente { Nit=nit, Nombre=user.UserName??"Por Derterminar", CupoAprobado=user.Cupo }, SaldoEnCartera=GetSaldo(nit), FechaRegistro };
+            return new SummaryDto { DatosCliente=new Cliente { Nit=nit, Nombre=user.UserName??"Por Derterminar", CupoAprobado=user.Cupo }, SaldoEnCartera=GetSaldo(nit), FechaRegistro= user.FechadeRegistro };
         }
 
         private decimal GetSaldo(string nit)

@@ -20,8 +20,8 @@ namespace PruebaGustavoBatista.Data
             }
 
             // insert dummy data
-            var user = new ApplicationUser { Nit = "1", UserName = "Usuario1", Cupo=10000000 };
-            var result = Task.Run(() => userManager.CreateAsync(user, "P@ssword")).Result;
+            var user = new ApplicationUser { Nit = "1", UserName = "Usuario1@tempmail.com", Cupo=10000000, FechadeRegistro= DateTime.Now, EmailConfirmed=true, LockoutEnabled=true };
+            var result = Task.Run(() => userManager.CreateAsync(user, "P@ssword1")).Result;
 
             context.Movimientos.AddRange(new List<Movimientos>() 
             { 
